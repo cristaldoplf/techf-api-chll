@@ -1,4 +1,7 @@
 package com.example.techchallenge.model.service;
 
-public interface ISaleService {
+
+import com.example.techchallenge.model.dto.SaleDto;
+
+public interface ISaleService extends ICRUDService<SaleDto>{
 }

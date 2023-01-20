@@ -1,4 +1,6 @@
 package com.example.techchallenge.model.service;
 
-public interface ISupplierService {
+import com.example.techchallenge.model.dto.SupplierDto;
+
+public interface ISupplierService extends ICRUDService<SupplierDto>{
 }

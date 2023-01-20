@@ -15,6 +15,7 @@ public class Supplier {
     private String cuit;
     private int phoneNumber;
     private String adress;
+    private Boolean layDown;
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "supplier")
 //    private Set<Product> products;
 
@@ -23,12 +24,21 @@ public class Supplier {
         //no args constructor
     }
 
-    public Supplier(Integer id, String name, String cuit, int phoneNumber, String adress) {
+    public Supplier(Integer id, String name, String cuit, int phoneNumber, String adress, Boolean layDown) {
         this.id = id;
         this.name = name;
         this.cuit = cuit;
         this.phoneNumber = phoneNumber;
         this.adress = adress;
+        this.layDown = layDown;
+    }
+
+    public Boolean getLayDown() {
+        return layDown;
+    }
+
+    public void setLayDown(Boolean layDown) {
+        this.layDown = layDown;
     }
 
     public Integer getId() {

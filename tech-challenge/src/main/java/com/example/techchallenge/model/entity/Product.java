@@ -16,18 +16,28 @@ public class Product {
     @JoinColumn(name = "fk_supplier", referencedColumnName = "id", nullable = false)
     @JsonBackReference
     private Supplier supplier;
+    private Boolean layDown;
 
     public Product() {
         //no args constructor
     }
 
-    public Product(Integer id, String name, String description, Double price, Integer stock, Supplier supplier) {
+    public Product(Integer id, String name, String description, Double price, Integer stock, Supplier supplier, Boolean layDown) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.price = price;
         this.stock = stock;
         this.supplier = supplier;
+        this.layDown = layDown;
+    }
+
+    public Boolean getLayDown() {
+        return layDown;
+    }
+
+    public void setLayDown(Boolean layDown) {
+        this.layDown = layDown;
     }
 
     public Integer getId() {

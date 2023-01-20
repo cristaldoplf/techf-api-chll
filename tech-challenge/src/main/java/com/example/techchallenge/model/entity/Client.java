@@ -15,18 +15,29 @@ public class Client {
     private int dni;
     private int phoneNumber;
     private String adress;
+    private Boolean layDown;
+
 
     public Client() {
         //no args constructor
     }
 
-    public Client(Integer id, String name, String lastName, int dni, int phoneNumber, String adress) {
+    public Client(Integer id, String name, String lastName, int dni, int phoneNumber, String adress, Boolean layDown) {
         this.id = id;
         this.name = name;
         this.lastName = lastName;
         this.dni = dni;
         this.phoneNumber = phoneNumber;
         this.adress = adress;
+        this.layDown = layDown;
+    }
+
+    public Boolean getLayDown() {
+        return layDown;
+    }
+
+    public void setLayDown(Boolean layDown) {
+        this.layDown = layDown;
     }
 
     public Integer getId() {
