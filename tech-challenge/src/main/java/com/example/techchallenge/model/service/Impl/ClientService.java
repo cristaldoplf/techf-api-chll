@@ -1,10 +1,10 @@
 package com.example.techchallenge.model.service.Impl;
 
 import com.example.techchallenge.exceptions.ResourceNotFoundException;
-import com.example.techchallenge.model.dto.ProductDto;
-import com.example.techchallenge.model.entity.Product;
-import com.example.techchallenge.model.repository.IProductRepository;
-import com.example.techchallenge.model.service.IProductService;
+import com.example.techchallenge.model.dto.ClientDto;
+import com.example.techchallenge.model.entity.Client;
+import com.example.techchallenge.model.repository.IClientRepository;
+import com.example.techchallenge.model.service.IClientService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,69 +15,69 @@ import java.util.Optional;
 import java.util.Set;
 
 @Service
-public class ClientService implements IProductService {
+public class ClientService implements IClientService {
 
     @Autowired
-    IProductRepository productRepository;
+    IClientRepository clientRepository;
 
     @Autowired
     ModelMapper modelMapper;
 
 
     @Override
-    public ProductDto findById(Integer id) throws ResourceNotFoundException {
-        Optional<Product> product = productRepository.findById(id);
-        if (product.isPresent()) {
-            return modelMapper.map(product, ProductDto.class);
+    public ClientDto findById(Integer id) throws ResourceNotFoundException {
+        Optional<Client> client = clientRepository.findById(id);
+        if (client.isPresent()) {
+            return modelMapper.map(client, ClientDto.class);
         }
-        throw new ResourceNotFoundException("The product with ID: " + id + " does not exist");
+        throw new ResourceNotFoundException("The client with ID: " + id + " does not exist");
     }
 
     @Override
-    public ProductDto create(ProductDto productDto) {
-        Product productResponse = productRepository.save(modelMapper.map(productDto, Product.class));
-        ProductDto responseProductDto = modelMapper.map(productResponse, ProductDto.class);
-        return responseProductDto;
+    public ClientDto create(ClientDto clientDto) {
+        Client clientResponse = clientRepository.save(modelMapper.map(clientDto, Client.class));
+        ClientDto clientResponseDto = modelMapper.map(clientResponse, ClientDto.class);
+        return clientResponseDto;
     }
 
     @Override
     public void deleteById(Integer id) throws ResourceNotFoundException {
-        Optional<Product> product = productRepository.findById(id);
-        if (!product.isPresent()) {
-            throw new ResourceNotFoundException("The product with ID " + id + " that you want delete does not exists.");
+        Optional<Client> client = clientRepository.findById(id);
+        if (!client.isPresent()) {
+            throw new ResourceNotFoundException("The client with ID " + id + " that you want delete does not exists.");
         } else {
-            product.get().setLayDown(true);
-            update(modelMapper.map(product, ProductDto.class));
+            client.get().setLayDown(true);
+            update(modelMapper.map(client, ClientDto.class));
         }
     }
 
     @Override
     public void activeById(Integer id) throws ResourceNotFoundException {
-        Optional<Product> product = productRepository.findById(id);
-        if (!product.isPresent()) {
-            throw new ResourceNotFoundException("The product with ID " + id + " that you want recover does not exists.");
+        Optional<Client> client = clientRepository.findById(id);
+        if (!client.isPresent()) {
+            throw new ResourceNotFoundException("The client with ID " + id + " that you want recover does not exists.");
         } else {
-            product.get().setLayDown(false);
-            update(modelMapper.map(product, ProductDto.class));
+            client.get().setLayDown(false);
+            update(modelMapper.map(client, ClientDto.class));
         }
     }
 
     @Override
-    public ProductDto update(ProductDto productDto) throws ResourceNotFoundException {
-        Product product = modelMapper.map(productDto, Product.class);
-        if (productRepository.existsById(product.getId())){
-            return modelMapper.map(productRepository.save(product), ProductDto.class);
+    public ClientDto update(ClientDto clientDto) throws ResourceNotFoundException {
+        Client client = modelMapper.map(clientDto, Client.class);
+        if (clientRepository.existsById(client.getId())) {
+            return modelMapper.map(clientRepository.save(client), ClientDto.class);
         }
-        throw new ResourceNotFoundException("The product with ID "+ product.getId() +" that you want update does not exists.");
+        throw new ResourceNotFoundException("The client with ID " + client.getId() + " that you want update does not exists.");
     }
 
     @Override
-    public Set<ProductDto> findAll() {
-        List<Product> productList = productRepository.findAll();
-        Set<ProductDto> productDtos = new HashSet<>();
-        for (Product prod: productList) {
-            productDtos.add(modelMapper.map(prod, ProductDto.class));
+    public Set<ClientDto> findAll() {
+        List<Client> clientList = clientRepository.findAll();
+        Set<ClientDto> clientDtos = new HashSet<>();
+        for (Client cli : clientList) {
+            clientDtos.add(modelMapper.map(cli, ClientDto.class));
         }
-        return productDtos;
+        return clientDtos;
     }
 }
