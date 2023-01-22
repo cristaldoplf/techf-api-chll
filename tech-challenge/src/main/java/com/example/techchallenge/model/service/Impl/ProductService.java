@@ -68,18 +68,21 @@ public class ProductService implements IProductService {
     @Override
     public ProductDto update(ProductDto productDto) throws ResourceNotFoundException {
         Product product = modelMapper.map(productDto, Product.class);
-        if (productRepository.existsById(product.getId())){
+        if (productRepository.existsById(product.getId())) {
             return modelMapper.map(productRepository.save(product), ProductDto.class);
         }
-        throw new ResourceNotFoundException("The product with ID "+ product.getId() +" that you want update does not exists.");
+        throw new ResourceNotFoundException("The product with ID " + product.getId() + " that you want update does not exists.");
     }
 
     @Override
-    public Set<ProductDto> findAll() {
+    public Set<ProductDto> findAll() throws ResourceNotFoundException {
         List<Product> productList = productRepository.findAll();
         Set<ProductDto> productDtos = new HashSet<>();
-        for (Product prod: productList) {
+        for (Product prod : productList) {
             productDtos.add(modelMapper.map(prod, ProductDto.class));
+        }
+        if (productDtos.size() < 1) {
+            throw new ResourceNotFoundException("There is no products available");
         }
         return productDtos;
     }

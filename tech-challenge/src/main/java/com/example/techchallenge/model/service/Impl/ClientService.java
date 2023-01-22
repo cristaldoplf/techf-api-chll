@@ -72,11 +72,14 @@ public class ClientService implements IClientService {
     }
 
     @Override
-    public Set<ClientDto> findAll() {
+    public Set<ClientDto> findAll() throws ResourceNotFoundException {
         List<Client> clientList = clientRepository.findAll();
         Set<ClientDto> clientDtos = new HashSet<>();
         for (Client cli : clientList) {
             clientDtos.add(modelMapper.map(cli, ClientDto.class));
+        }
+        if (clientDtos.size()<1){
+            throw new ResourceNotFoundException("There is no clients available");
         }
         return clientDtos;
     }

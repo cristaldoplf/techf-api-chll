@@ -13,7 +13,7 @@ public class Sale {
     private Integer id;
     private Date date;
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "fk_client", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "fk_client", referencedColumnName = "id")
     @JsonBackReference
     private Client client;
     @OneToMany(cascade = CascadeType.ALL)
@@ -27,7 +27,6 @@ public class Sale {
     }
 
     public Sale() {
-
         //no args constructor
     }
 

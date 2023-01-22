@@ -13,7 +13,7 @@ public class Product {
     private Double price;
     private Integer stock;
     @ManyToOne(cascade = CascadeType.MERGE)
-    @JoinColumn(name = "fk_supplier", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "fk_supplier", referencedColumnName = "id")
     @JsonBackReference
     private Supplier supplier;
     private Boolean layDown;

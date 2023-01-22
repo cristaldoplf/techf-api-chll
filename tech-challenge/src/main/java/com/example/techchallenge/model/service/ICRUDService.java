@@ -10,5 +10,5 @@ public interface ICRUDService<T> {
     void deleteById(Integer id) throws ResourceNotFoundException;
     void activeById(Integer id) throws ResourceNotFoundException;
     T update(T t) throws ResourceNotFoundException;
-    Set<T> findAll();
+    Set<T> findAll() throws ResourceNotFoundException;
 }

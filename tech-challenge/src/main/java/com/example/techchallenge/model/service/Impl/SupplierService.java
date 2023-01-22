@@ -72,11 +72,14 @@ public class SupplierService implements ISupplierService {
     }
 
     @Override
-    public Set<SupplierDto> findAll() {
+    public Set<SupplierDto> findAll() throws ResourceNotFoundException {
         List<Supplier> supplierList = supplierRepository.findAll();
         Set<SupplierDto> supplierDtos = new HashSet<>();
         for (Supplier supp : supplierList) {
             supplierDtos.add(modelMapper.map(supp, SupplierDto.class));
+        }
+        if (supplierDtos.size()<1){
+            throw new ResourceNotFoundException("There is no Suppliers available");
         }
         return supplierDtos;
     }
