@@ -1,11 +1,18 @@
 package com.example.techchallenge.model.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class SupplierDto {
     private Integer id;
+    @NotBlank(message = "The name is required")
     private String name;
+    @NotBlank(message = "The Cuit is required")
     private String cuit;
+    @NotBlank(message = "The Phone number is required")
     private int phoneNumber;
+    @NotBlank(message = "The Adress is required")
     private String adress;
+    @NotBlank(message = "The layDown is required")
     private Boolean layDown;
 
     public SupplierDto(Integer id, String name, String cuit, int phoneNumber, String adress, Boolean layDown) {

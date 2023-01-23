@@ -2,20 +2,26 @@ package com.example.techchallenge.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull(message = "name is required")
     private String name;
+    @NotNull(message = "description is required")
     private String description;
+    @NotNull(message = "price is required")
     private Double price;
+    @NotNull(message = "stock is required")
     private Integer stock;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "fk_supplier", referencedColumnName = "id")
     @JsonBackReference
     private Supplier supplier;
+    @NotNull(message = "layDown is required")
     private Boolean layDown;
 
     public Product() {

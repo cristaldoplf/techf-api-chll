@@ -1,12 +1,20 @@
 package com.example.techchallenge.model.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public class ClientDto {
     private Integer id;
+    @NotNull(message = "name is required")
     private String name;
+    @NotNull(message = "lastName is required")
     private String lastName;
+    @NotNull(message = "dni is required")
     private int dni;
+    @NotNull(message = "phone number is required")
     private int phoneNumber;
+    @NotNull(message = "adress ir required")
     private String adress;
+    @NotNull(message = "layDown is required")
     private Boolean layDown;
 
     public ClientDto() {

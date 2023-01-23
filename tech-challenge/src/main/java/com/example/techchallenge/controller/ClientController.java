@@ -4,6 +4,7 @@ import com.example.techchallenge.exceptions.ResourceNotFoundException;
 import com.example.techchallenge.model.dto.ClientDto;
 import com.example.techchallenge.model.dto.ProductDto;
 import com.example.techchallenge.model.service.Impl.ClientService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class ClientController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody ClientDto clientDto) {
+    public ResponseEntity<?> create(@Valid @RequestBody ClientDto clientDto) {
         ClientDto clientDtoResp = clientService.create(clientDto);
         return new ResponseEntity<>(clientDtoResp, HttpStatus.CREATED);
     }
@@ -43,7 +44,7 @@ public class ClientController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) throws ResourceNotFoundException {
         clientService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);

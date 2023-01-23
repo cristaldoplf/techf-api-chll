@@ -54,7 +54,7 @@ public class ProductController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) throws ResourceNotFoundException {
         productService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);

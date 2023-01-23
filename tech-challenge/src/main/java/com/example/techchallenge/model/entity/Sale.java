@@ -2,6 +2,7 @@ package com.example.techchallenge.model.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
 
 import java.time.LocalDate;
 import java.util.Set;
@@ -11,6 +12,7 @@ public class Sale {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull(message = "date is required")
     private LocalDate date;
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "fk_client", referencedColumnName = "id")
@@ -19,15 +21,20 @@ public class Sale {
     @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "fk_product", referencedColumnName = "id")
     private Set<Product> products;
+    @NotNull(message = "totalPrice is required")
     private Double totalPrice;
+    @NotNull(message = "Quantity is required")
     private int Quantity;
 
-    public Sale(Integer id, LocalDate date, Client client, Set<Product> products) {
+    public Sale(Integer id, LocalDate date, Client client, Set<Product> products, Double totalPrice, int quantity) {
         this.id = id;
         this.date = date;
         this.client = client;
         this.products = products;
+        this.totalPrice = totalPrice;
+        Quantity = quantity;
     }
+
 
 
     public Sale() {

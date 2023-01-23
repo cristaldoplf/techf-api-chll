@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 public class Supplier {
@@ -11,10 +12,15 @@ public class Supplier {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotBlank(message = "The name is required")
     private String name;
+    @NotBlank(message = "The Cuit is required")
     private String cuit;
+    @NotBlank(message = "The Phone number is required")
     private int phoneNumber;
+    @NotBlank(message = "The Adress is required")
     private String adress;
+    @NotBlank(message = "The layDown is required")
     private Boolean layDown;
 //    @OneToMany(fetch = FetchType.LAZY, mappedBy = "supplier")
 //    private Set<Product> products;

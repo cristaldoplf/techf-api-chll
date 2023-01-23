@@ -4,17 +4,24 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+    @NotNull(message = "name is required")
     private String name;
+    @NotNull(message = "lastName is required")
     private String lastName;
+    @NotNull(message = "dni is required")
     private int dni;
+    @NotNull(message = "phone number is required")
     private int phoneNumber;
+    @NotNull(message = "adress ir required")
     private String adress;
+    @NotNull(message = "layDown is required")
     private Boolean layDown;
 
 

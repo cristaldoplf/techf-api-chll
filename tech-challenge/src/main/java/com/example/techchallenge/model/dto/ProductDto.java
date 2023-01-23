@@ -1,15 +1,21 @@
 package com.example.techchallenge.model.dto;
 
 import com.example.techchallenge.model.entity.Supplier;
+import jakarta.validation.constraints.NotNull;
 
 public class ProductDto {
 
     private Integer id;
+    @NotNull(message = "name is required")
     private String name;
+    @NotNull(message = "description is required")
     private String description;
+    @NotNull(message = "price is required")
     private Double price;
+    @NotNull(message = "stock is required")
     private Integer stock;
     private Supplier supplier;
+    @NotNull(message = "layDown is required")
     private Boolean layDown;
 
     public ProductDto() {

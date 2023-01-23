@@ -4,6 +4,8 @@ import com.example.techchallenge.exceptions.ResourceNotFoundException;
 import com.example.techchallenge.model.dto.ProductDto;
 import com.example.techchallenge.model.dto.SupplierDto;
 import com.example.techchallenge.model.service.Impl.SupplierService;
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +34,7 @@ public class SupplierController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> create (@RequestBody SupplierDto supplierDto){
+    public ResponseEntity<?> create (@Valid @RequestBody SupplierDto supplierDto){
         SupplierDto supplierDtoResp = supplierService.create(supplierDto);
         return new ResponseEntity<>(supplierDtoResp, HttpStatus.CREATED);
     }
@@ -43,7 +45,7 @@ public class SupplierController {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public ResponseEntity<?> delete(@PathVariable Integer id) throws ResourceNotFoundException {
         supplierService.deleteById(id);
         return new ResponseEntity<>(HttpStatus.OK);
