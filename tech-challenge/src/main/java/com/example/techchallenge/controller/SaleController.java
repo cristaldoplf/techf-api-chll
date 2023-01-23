@@ -43,12 +43,6 @@ public class SaleController {
         return new ResponseEntity<>(saleDtos, HttpStatus.OK);
     }
 
-//    @GetMapping("/find/{id}")
-//    public ResponseEntity<?> findBySupplierName(@PathVariable Integer id) throws ResourceNotFoundException {
-//        Set<SaleDto> saleDtos = saleService.findSalesBySupplierName(id);
-//        return new ResponseEntity<>(saleDtos, HttpStatus.OK);
-//    }
-
 
 
 }

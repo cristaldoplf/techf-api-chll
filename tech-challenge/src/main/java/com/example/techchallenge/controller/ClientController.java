@@ -2,7 +2,6 @@ package com.example.techchallenge.controller;
 
 import com.example.techchallenge.exceptions.ResourceNotFoundException;
 import com.example.techchallenge.model.dto.ClientDto;
-import com.example.techchallenge.model.dto.ProductDto;
 import com.example.techchallenge.model.service.Impl.ClientService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
