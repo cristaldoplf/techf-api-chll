@@ -24,6 +24,18 @@ public class ProductController {
         return new ResponseEntity<>(productDtoSet, HttpStatus.OK);
     }
 
+    @GetMapping("/find/list/{stock}")
+    public ResponseEntity<?> findByStock(@PathVariable Integer stock) throws ResourceNotFoundException {
+        Set<ProductDto> productDtoSet = productService.findProductByStock(stock);
+        return new ResponseEntity<>(productDtoSet, HttpStatus.OK);
+    }
+
+//    @GetMapping("/find/list/supplier/{name}")
+//    public ResponseEntity<?> findByStock(@PathVariable String name) throws ResourceNotFoundException {
+//        Set<ProductDto> productDtoSet = productService.findProductsBySupplier(name);
+//        return new ResponseEntity<>(productDtoSet, HttpStatus.OK);
+//    }
+
     @GetMapping("/find/{id}")
     public ResponseEntity<?> findById(@PathVariable Integer id) throws ResourceNotFoundException {
         ProductDto productDto = productService.findById(id);
@@ -54,11 +66,5 @@ public class ProductController {
         return new ResponseEntity<>(productDtoResp, HttpStatus.OK);
     }
 
-    //TO-DO
-    //consultar produyctos con stock bajo con bajo considerando argumento enviado
 
-    //TO-DO
-    //consultar productos en stock buscando por proveedor
-    //NOTA: me pide que consulte compras realizadas a X proveedor, pero en la documentacion no piden
-    //en ningun momento crear una referencia a esto mismo, interpreto que quieren esto.
 }

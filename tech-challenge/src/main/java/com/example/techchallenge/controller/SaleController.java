@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Set;
 
 @RestController
@@ -31,8 +34,21 @@ public class SaleController {
         return new ResponseEntity<>(saleDtoResp, HttpStatus.CREATED);
     }
 
-    //TO-DO
-    //consultar ventas de X dia
+    @GetMapping("/find/date/{date}")
+    public ResponseEntity<?> findByDate(@PathVariable String date) throws ResourceNotFoundException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate convertedDate = LocalDate.parse(date, formatter);
+        Set<SaleDto> saleDtos = saleService.findSalesByDate(convertedDate);
+
+        return new ResponseEntity<>(saleDtos, HttpStatus.OK);
+    }
+
+//    @GetMapping("/find/{id}")
+//    public ResponseEntity<?> findBySupplierName(@PathVariable Integer id) throws ResourceNotFoundException {
+//        Set<SaleDto> saleDtos = saleService.findSalesBySupplierName(id);
+//        return new ResponseEntity<>(saleDtos, HttpStatus.OK);
+//    }
+
 
 
 }

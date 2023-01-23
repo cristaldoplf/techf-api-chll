@@ -36,6 +36,7 @@ public class ProductService implements IProductService {
         throw new ResourceNotFoundException("The product with ID: " + id + " does not exist");
     }
 
+
     @Override
     public ProductDto create(ProductDto productDto) {
         Product productResponse = productRepository.save(modelMapper.map(productDto, Product.class));
@@ -74,6 +75,19 @@ public class ProductService implements IProductService {
         throw new ResourceNotFoundException("The product with ID " + product.getId() + " that you want update does not exists.");
     }
 
+
+    public Set<ProductDto> findProductByStock(Integer stockNumber) throws ResourceNotFoundException {
+        List<Product> productList = productRepository.findProductByStock(stockNumber);
+        Set<ProductDto> productDtos = new HashSet<>();
+        for (Product prod : productList) {
+            productDtos.add(modelMapper.map(prod, ProductDto.class));
+        }
+        if (productDtos.size() < 1) {
+            throw new ResourceNotFoundException("There is no products available");
+        }
+        return productDtos;
+    }
+
     @Override
     public Set<ProductDto> findAll() throws ResourceNotFoundException {
         List<Product> productList = productRepository.findAll();
@@ -86,4 +100,16 @@ public class ProductService implements IProductService {
         }
         return productDtos;
     }
+
+//    public Set<ProductDto> findProductsBySupplier(String name) throws ResourceNotFoundException {
+//        List<Product> productList = productRepository.findProductsBySupplier(name);
+//        Set<ProductDto> productDtos = new HashSet<>();
+//        for (Product prod : productList) {
+//            productDtos.add(modelMapper.map(prod, ProductDto.class));
+//        }
+//        if (productDtos.size() < 1) {
+//            throw new ResourceNotFoundException("There is no products available");
+//        }
+//        return productDtos;
+//    }
 }

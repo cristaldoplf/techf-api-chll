@@ -1,9 +1,7 @@
 package com.example.techchallenge.model.service.Impl;
 
 import com.example.techchallenge.exceptions.ResourceNotFoundException;
-import com.example.techchallenge.model.dto.ProductDto;
 import com.example.techchallenge.model.dto.SaleDto;
-import com.example.techchallenge.model.entity.Product;
 import com.example.techchallenge.model.entity.Sale;
 import com.example.techchallenge.model.repository.ISaleRepository;
 import com.example.techchallenge.model.service.ISaleService;
@@ -11,9 +9,8 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 
 @Service
 public class SaleService implements ISaleService {
@@ -23,7 +20,6 @@ public class SaleService implements ISaleService {
 
     @Autowired
     ModelMapper modelMapper;
-
 
 
     @Override
@@ -57,12 +53,42 @@ public class SaleService implements ISaleService {
     public Set<SaleDto> findAll() throws ResourceNotFoundException {
         List<Sale> saleList = saleRepository.findAll();
         Set<SaleDto> saleDtos = new HashSet<>();
-        for (Sale sal: saleList) {
+        for (Sale sal : saleList) {
             saleDtos.add(modelMapper.map(sal, SaleDto.class));
         }
-        if (saleDtos.size()<1){
+
+        if (saleDtos.size() < 1) {
             throw new ResourceNotFoundException("There is no sales available");
         }
         return saleDtos;
     }
+
+    public Set<SaleDto> findSalesByDate(LocalDate date) throws ResourceNotFoundException {
+        Set<SaleDto> saleDtos = new HashSet<>();
+        List<Sale> sales = saleRepository.findSalesByDate(date);
+
+        if (sales.size() < 1){
+            throw new ResourceNotFoundException("There are no sales that Day");
+        }
+        for (Sale sale : sales) {
+            saleDtos.add(modelMapper.map(sale,SaleDto.class));
+        }
+
+        return saleDtos;
+
+    }
+
+//    public Set<SaleDto> findSalesBySupplierName(Integer id) throws ResourceNotFoundException {
+//        Set<SaleDto> saleDtos = new HashSet<>();
+//        List<Sale> sales = saleRepository.findSalesBySupplierName(id);
+//
+//        if (sales.size() < 1){
+//            throw new ResourceNotFoundException("There are no sales for that search");
+//        }
+//        for (Sale sale : sales) {
+//            saleDtos.add(modelMapper.map(sale,SaleDto.class));
+//        }
+//        return saleDtos;
+//    }
+
 }
